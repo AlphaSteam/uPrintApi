@@ -1,10 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
-from routes import microprint
+from routes.microprint import router as microprint_router
 
 app = FastAPI()
 
-app.include_router(microprint.router)
+app.include_router(microprint_router)
 
 
 @app.get("/")
