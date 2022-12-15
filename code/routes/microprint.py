@@ -38,13 +38,11 @@ def print_files(path):
 def save_file(file, filename):
     try:
         contents = file.file.read()
-        with open(os.path.join("tmp", filename), 'wb') as f:
+        with open(os.path.join("/tmp", filename), 'wb') as f:
             f.write(contents)
     except Exception:
         return {"message": "There was an error uploading the file(s)"}
     finally:
-        print_files("tmp")
-        print_files("tmp/")
         file.file.close()
 
 
@@ -56,14 +54,11 @@ async def generate_microprint(log=File(...), config=File(...)):
     save_file(config, "config.json")
 
     microprint_generator = SVGMicroprintGenerator.from_text_file(
-        file_path=os.path.join("tmp", "microprint.txt"),
-        config_file_path=os.path.join("tmp", "config.json"),
+        file_path="/tmp/microprint.txt",
+        config_file_path="/tmp/config.json",
         output_filename="/tmp/microprint.svg"
     )
 
     microprint_generator.render_microprint()
-
-    print_files("tmp")
-    print_files("tmp/")
 
     return FileResponse("/tmp/microprint.svg")
