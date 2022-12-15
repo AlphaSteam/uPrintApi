@@ -31,9 +31,9 @@ async def generate_microprint(log=File(...), config=File(...)):
     microprint_generator = SVGMicroprintGenerator.from_text_file(
         file_path=os.path.join("tmp", "microprint.txt"),
         config_file_path=os.path.join("tmp", "config.json"),
-        output_filename=os.path.join("tmp", "microprint.svg")
+        output_filename="/tmp/microprint.svg"
     )
 
     microprint_generator.render_microprint()
 
-    return FileResponse(os.path.join("tmp", "microprint.svg"))
+    return FileResponse("/tmp/microprint.svg")
