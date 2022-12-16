@@ -7,24 +7,29 @@
     "headers": [
         {
             "source": "/(.*)",
-            "headers": [
+            "has": [
                 {
+                    "type": "header",
                     "key": "Access-Control-Allow-Credentials",
                     "value": "true"
                 },
                 {
+                    "type": "header",
                     "key": "Access-Control-Allow-Origin",
                     "value": "*"
                 },
                 {
+                    "type": "header",
                     "key": "Access-Control-Allow-Methods",
                     "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
                 },
                 {
+                    "type": "header",
                     "key": "Access-Control-Allow-Headers",
                     "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
                 }
-            ]
+            ],
+            "destination": "code/main.py"
         }
     ],
     "rewrites": [
