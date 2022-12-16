@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from code.routes import microprint
+from api.routes import microprint
 
 app = FastAPI()
 
