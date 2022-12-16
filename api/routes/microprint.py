@@ -24,9 +24,9 @@ def save_file(file, filename):
 @router.post("/generate",
              summary="Requests microprint generation.",
              description=("Generates a microprint of a text file with uPrintGen. Returns svg file of the generated microprint"))
-async def generate_microprint(log=File(...), config=File(...)):
-    save_file(log, "microprint.txt")
-    save_file(config, "config.json")
+async def generate_microprint(text_file=File(...), config_file=File(...)):
+    save_file(text_file, "microprint.txt")
+    save_file(config_file, "config.json")
 
     microprint_generator = SVGMicroprintGenerator.from_text_file(
         file_path="/tmp/microprint.txt",
