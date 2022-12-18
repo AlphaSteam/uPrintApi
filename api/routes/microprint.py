@@ -1,4 +1,4 @@
-from fastapi import BackgroundTasks, APIRouter, Request, status, File
+from fastapi import BackgroundTasks, APIRouter, Request, status, File, HTTPException
 import os
 import aiofiles
 from uPrintGen import SVGMicroprintGenerator
