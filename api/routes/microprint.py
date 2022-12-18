@@ -28,12 +28,16 @@ async def generate_microprint(text_file=File(...), config_file=File(...)):
     save_file(text_file, "microprint.txt")
     save_file(config_file, "config.json")
 
-    microprint_generator = SVGMicroprintGenerator.from_text_file(
-        file_path="/tmp/microprint.txt",
-        config_file_path="/tmp/config.json",
-        output_filename="/tmp/microprint.svg"
-    )
+    try:
+        microprint_generator = SVGMicroprintGenerator.from_text_file(
+            file_path="/tmp/microprint.txt",
+            config_file_path="/tmp/config.json",
+            output_filename="/tmp/microprint.svg"
+        )
 
-    microprint_generator.render_microprint()
+        microprint_generator.render_microprint()
 
-    return FileResponse("/tmp/microprint.svg")
+        return FileResponse("/tmp/microprint.svg")
+    except JSONDecodeError:
+        raise HTTPException(
+            status_code=400, detail="Configuration file is not a valid JSON file.")
