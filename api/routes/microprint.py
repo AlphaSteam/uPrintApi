@@ -3,6 +3,7 @@ import os
 import aiofiles
 from uPrintGen import SVGMicroprintGenerator
 from fastapi.responses import FileResponse
+from json.decoder import JSONDecodeError
 
 router = APIRouter(
     prefix="/microprint",
@@ -39,5 +40,8 @@ async def generate_microprint(text_file=File(...), config_file=File(...)):
 
         return FileResponse("/tmp/microprint.svg")
     except JSONDecodeError:
+        raise HTTPException(
+            status_code=400, detail="Configuration file is not a valid JSON file.")
+    except TypeError:
         raise HTTPException(
             status_code=400, detail="Configuration file is not a valid JSON file.")
