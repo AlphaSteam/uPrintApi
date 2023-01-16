@@ -1,7 +1,7 @@
 from fastapi import BackgroundTasks, APIRouter, Request, status, File, HTTPException
 import os
 import aiofiles
-from uPrintGen import SVGMicroprintGenerator
+from uprintgen import SVGMicroprintGenerator
 from fastapi.responses import FileResponse
 from json.decoder import JSONDecodeError
 
