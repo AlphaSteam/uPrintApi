@@ -20,6 +20,11 @@ def save_file(file, filename):
     finally:
         file.file.close()
 
+def delete_file(filename):
+    try:
+        os.remove(os.path.join("/tmp", filename))
+    except Exception:
+        return {"message": "There was an error deleting the file(s)"}
 
 @router.post("/generate",
              summary="Requests microprint generation.",
@@ -36,6 +41,9 @@ async def generate_microprint(text_file=File(...), config_file=File(...)):
         )
 
         microprint_generator.render_microprint()
+
+        delete_file("microprint.txt")
+        delete_file("config.json")
 
         return FileResponse("/tmp/microprint.svg")
     except JSONDecodeError:
